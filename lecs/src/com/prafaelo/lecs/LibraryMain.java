@@ -7,7 +7,9 @@ import com.prafaelo.lecs.system.auth.Authenticatable;
 import com.prafaelo.lecs.system.user.Administrator;
 import com.prafaelo.lecs.system.user.Anonymous;
 import com.prafaelo.lecs.system.user.Librarian;
+import com.prafaelo.lecs.ui.LibraryUserGUI;
 import com.prafaelo.lecs.ui.Menu;
+import com.prafaelo.lecs.ui.RenewGUI;
 
 public class LibraryMain {
 
@@ -68,7 +70,15 @@ public class LibraryMain {
 			}
 			
 			if(opcao==11){
-				BookCopy.renewLending();
+				//BookCopy.renewLendingTyped();
+				Thread renewGui = new Thread(new RenewGUI());
+				renewGui.start();
+			}
+
+			if(opcao==12){
+				
+				Thread libraryUserGui = new Thread(new LibraryUserGUI());
+				libraryUserGui.start();
 			}
 			
 			System.out.println("\nVoltando ao Menu...\n");

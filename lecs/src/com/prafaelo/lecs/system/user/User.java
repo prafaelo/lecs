@@ -8,10 +8,6 @@ public abstract class User {
 	private String address;
 	private String phoneNumber;
 
-	public User() {
-		create();
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -50,8 +46,6 @@ public abstract class User {
 		String phoneNumber = LibraryUtil.getTypedValue("Enter phone number:");
 		setPhoneNumber(phoneNumber);
 	}
-	
-	abstract void create();
 
 	@Override
 	public String toString() {

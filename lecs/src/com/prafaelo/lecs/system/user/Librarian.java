@@ -14,6 +14,7 @@ public class Librarian extends User implements Login, LibraryUser{
 	private int libraryCode;
 	
 	public Librarian() {
+		createTyped();
 		createLogin();
 		createLibraryUser();
 		System.out.println("Librarian account sucessfully created:");
@@ -107,8 +108,8 @@ public class Librarian extends User implements Login, LibraryUser{
 		return true;
 	}
 
-	@Override
-	void create() {
+
+	void createTyped() {
 		setNameTyped();
 		setAddressTyped();
 		setPhoneNumberTyped();

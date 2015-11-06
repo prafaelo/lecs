@@ -276,7 +276,7 @@ public class Book {
 					System.err.println("(Error) There is no copies available!");
 				}
 			} else {
-				System.err.println("Book Copy not found!");				
+				System.err.println("(Error) Book Copy not found!");				
 			}
 			
 		}

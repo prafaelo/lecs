@@ -69,7 +69,7 @@ public class BookCopy {
 		}
 	}
 
-	public static void renewLending(){
+	public static void renewLendingTyped(){
 		Book book = Book.getBookTyped();
 		
 		if(book!=null){

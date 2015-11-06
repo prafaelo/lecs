@@ -1,6 +1,8 @@
 package com.prafaelo.lecs.collection;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import com.prafaelo.lecs.LibraryUtil;
 import com.prafaelo.lecs.system.user.DefaultUser;
@@ -30,6 +32,25 @@ public class BookLending {
 
 	public void setReturnDate() {
 		this.returnDate = LocalDate.now().plusDays(15);
+	}
+	
+	public void setReturnDate(int days){
+		this.returnDate = this.getReturnDate().plusDays(days);
+	}
+	
+	public String renew(int days){
+		
+		Book book = getBookCopy().getBook();
+		
+		if(book.getAvailableCopiesSize() > 0 || book.getReserveUser() == null){
+			setReturnDate(days);
+			return new String("Book copy renovated!\n"
+					        + "Book: " + book.getTitle()
+					);
+		}
+		return new String("Book copy is already reserved!\n"
+				        + "Book: " + book.getTitle()
+				        );
 	}
 
 	public LocalDate getDATE() {
@@ -64,6 +85,27 @@ public class BookLending {
 			libraryUser = new DefaultUser();
 		}
 		setLibraryUser(libraryUser);
+	}
+	
+	public static ArrayList<BookLending> getBookLendingByLibraryCode(int libraryCode) {
+		
+		ArrayList<BookLending> bookLendings= new ArrayList<BookLending>(); 
+		
+		for(Collection<Book> books : Book.getBooks().values()){
+			for(Book book : books){
+				for(BookCopy bookCopy : book.getCopies()){
+					if(bookCopy.getLended() != null) {
+						BookLending bookLending = bookCopy.getLended();
+						if(bookLending.getLibraryUser().getLibraryCode() == libraryCode){
+							bookLendings.add(bookLending);
+						}						
+					}
+				}
+			}
+		}
+		
+		
+		return bookLendings;
 	}
 
 	@Override
